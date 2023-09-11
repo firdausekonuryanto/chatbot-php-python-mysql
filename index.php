@@ -9,9 +9,29 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Akatech Chatbot!</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        .logout-mobile{
+            display: block;
+        }
+        .logout-mobilex{
+            display: none;
+        }
+        @media (max-width: 768px) {
+    /* Center align the content within the .header-container */
+    .logout-mobile {
+        display: none;
+    }
+    .logout-mobilex{
+        display: block;
+    }
+}
+    </style>
 </head>
 <body>
-<div style="background-color:#329179; color:white; padding:15px; display: flex; justify-content: space-between; align-items: center;">
+    <?php 
+    if(isset($_SESSION['username'])){
+    ?>
+<div class="header-container" style="background-color:#329179; color:white; padding:15px; display: flex; justify-content: space-between; align-items: center;">
     <div style="display: flex; align-items: center;">
         <img src="jodigas-circle-logo.png">
         <div style="display: flex; flex-direction: column; margin-left: 10px;">
@@ -19,18 +39,28 @@ session_start();
             <span style="margin-top: -12px;">We grow better for the future</span>
         </div>
     </div>
-    
-    <!-- Right side for logout -->
-    <a href="logout.php" style="color: white; text-decoration: none;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-        <path d="M9.5 1.5a.5.5 0 0 0-1 0V8a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0-.5.5V14a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0-.5.5V8a.5.5 0 0 0 .5-.5z"/>
-        <path d="M13.354 8.354a.5.5 0 0 0-.708-.708L9 11.293V2.5a.5.5 0 0 0-1 0v8.793L2.354 7.646a.5.5 0 1 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4z"/>
-    </svg>
-    Logout (<?php echo $_SESSION['username']; ?>)
-</a>
+    <div class="logout-mobile" >
+    <a  href="logout.php" style="color: white; text-decoration: none; ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+            <path d="M9.5 1.5a.5.5 0 0 0-1 0V8a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0-.5.5V14a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0-.5.5V8a.5.5 0 0 0 .5-.5z"/>
+            <path d="M13.354 8.354a.5.5 0 0 0-.708-.708L9 11.293V2.5a.5.5 0 0 0-1 0v8.793L2.354 7.646a.5.5 0 1 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4z"/>
+        </svg>
+        Logout (<?php echo $_SESSION['username']; ?>)
+    </a>
+    </div>
 </div>
 
-
+<div class="header-containerx d-flex flex-row-reverse"  style="background-color:#329179; margin-top:-20px; color:white; padding:10px;  align-items: center;">
+<div class="logout-mobilex" >   
+<a  href="logout.php" style="color: white; text-decoration: none; ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+            <path d="M9.5 1.5a.5.5 0 0 0-1 0V8a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0-.5.5V14a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0-.5.5V8a.5.5 0 0 0 .5-.5z"/>
+            <path d="M13.354 8.354a.5.5 0 0 0-.708-.708L9 11.293V2.5a.5.5 0 0 0-1 0v8.793L2.354 7.646a.5.5 0 1 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4z"/>
+        </svg>
+        Logout (<?php echo $_SESSION['username']; ?>)
+    </a>
+</div>
+</div>
 
     <?php include 'koneksi.php'; ?>
     <div class="container-fluid">
@@ -64,5 +94,6 @@ session_start();
             </div>
         </div>  
     </div>
+    <?php } else { header("Location: login.php"); } ?>
     </body>
 </html>
